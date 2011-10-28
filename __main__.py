@@ -56,7 +56,12 @@ if __name__ == '__main__':
 
     # Do I need to sort files ?
 
+    if totalfiles == 0:
+      print 'There is no png files in', path
+      continue
+
     for strpngfile in files:
+      print 'In ', path, ', ', strpngfile, 'is loading...'
       pngfile = png.Reader(path+'/'+strpngfile)
       width, height, pixels, data = pngfile.asRGBA()
 
@@ -112,6 +117,8 @@ if __name__ == '__main__':
 
       if data.has_key('size'):
         del data['size']
+
+      print 'In ', path, ', ', str(fileidx)+'.png is written'
 
       w = png.Writer(width=finalwidth, height=finalheight, **data)
       outfile = open(path + '/' + str(fileidx) + '.png', 'wb')
